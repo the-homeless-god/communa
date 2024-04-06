@@ -14,6 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: agent - get server status
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: neofetch && df -H / && free -m
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -31,14 +39,6 @@ jobs:
           deploy_key: ${{ secrets.DEPLOY_KEY }}
           publish_dir: ./dist
           force_orphan: true
-
-      - name: agent - get server status
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: neofetch && df -H / && free -m
 
       - name: agent - install ssh key
         uses: shimataro/ssh-key-action@v2
