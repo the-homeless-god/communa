@@ -40,6 +40,11 @@ jobs:
           publish_dir: ./dist
           force_orphan: true
 
+      - name: Re-build for agent
+        run: |
+          sed -i '35d' vite.config.ts
+          npm run build
+
       - name: agent - install ssh key
         uses: shimataro/ssh-key-action@v2
         with:
