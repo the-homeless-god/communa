@@ -32,6 +32,7 @@ const srcPathAliases = srcPaths.reduce((acc, dir) => {
 
 const config = () => {
   return defineConfig({
+    base: '/communa/',
     build: {
       // NOTE: This isn't really working. At the very least, it's still useful
       // for exposing source code to users.
