@@ -43,6 +43,7 @@ jobs:
       - name: Re-build for agent
         run: |
           sed -i '35d' vite.config.ts
+          npm pkg set homepage='${{ secrets.SERVER_DOMAIN }}'
           npm run build
 
       - name: agent - install ssh key
